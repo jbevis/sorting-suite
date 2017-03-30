@@ -59,7 +59,7 @@ describe('Bubble Sort', () => {
   });
 
   it('should be able to sort a huge array of random numbers', () => {
-    let randomNums = numberGenerator(1, 100, 14500);
+    let randomNums = numberGenerator(1, 100, 12500);
     let randomNums2 = randomNums
 
     assert.deepEqual(bubbleSort(randomNums), randomNums2.sort(compareNumbers));

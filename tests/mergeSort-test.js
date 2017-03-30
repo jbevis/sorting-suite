@@ -33,7 +33,7 @@ describe('Merge Sort', () => {
     assert.deepEqual(mergeSort(randomLetters), randomLetters2.sort());
   });
 
-  it('should be able to sort an arry of negative numbers', () => {
+  it('should be able to sort an array of negative numbers', () => {
     let negNums = [-2, -1, -4, -3];
 
     assert.deepEqual(mergeSort(negNums), [-4, -3, -2, -1]);
