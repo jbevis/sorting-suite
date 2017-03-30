@@ -1,8 +1,8 @@
 import { assert } from 'chai';
 import insertionSort from '../scripts/insertionSort';
-import numberGenerator from '../scripts/numberGenerator'
+import { numberGenerator, compareNumbers, letterGenerator } from '../scripts/randomGenerators';
 
-describe('insertionSort', () => {
+describe('Insertion Sort', () => {
 
   it('should be a function', () => {
     assert.isFunction(insertionSort);
@@ -20,6 +20,19 @@ describe('insertionSort', () => {
     assert.deepEqual(insertionSort(letters), ['a', 'b', 'c', 'd']);
   });
 
+  it('should be able to sort an array of upper case letters', () => {
+    let upperCase = ['D', 'B', 'A', 'C'];
+
+    assert.deepEqual(insertionSort(upperCase), ['A', 'B', 'C', 'D']);
+  });
+
+  it('shoulbe be able to sort a random array of letters', () => {
+    let randomLetters = letterGenerator(10);
+    let randomLetters2 = randomLetters;
+
+    assert.deepEqual(insertionSort(randomLetters), randomLetters2.sort());
+  });
+
   it('should be able to sort an arry of negative numbers', () => {
     let negNums = [-2, -1, -4, -3];
 
@@ -33,14 +46,28 @@ describe('insertionSort', () => {
   });
 
   it('should be able to sort a random array of numbers', () => {
-    let randomNums = numberGenerator(1, 20, 10);
+    let randomNums = numberGenerator(1, 100, 10);
 
-    assert.deepEqual(insertionSort(randomNums), randomNums.sort());
+    assert.deepEqual(insertionSort(randomNums), randomNums.sort(compareNumbers));
   });
 
   it('should be able to sort a larger array of random numbers', () => {
     let randomNums = numberGenerator(1, 100, 100);
 
-    assert.deepEqual(insertionSort(randomNums), randomNums.sort());
+    assert.deepEqual(insertionSort(randomNums), randomNums.sort(compareNumbers));
+  });
+
+  it('should be able to sort a huge array of random numbers', () => {
+    let randomNums = numberGenerator(1, 100, 20000);
+    let randomNums2 = randomNums
+
+    assert.deepEqual(insertionSort(randomNums), randomNums2.sort(compareNumbers));
+  });
+
+  it('should be able to sort a very large array of random negative numbers', () => {
+    let randomNums = numberGenerator(-100, -1, 1000);
+    let randomNums2 = randomNums
+
+    assert.deepEqual(insertionSort(randomNums), randomNums2.sort(compareNumbers));
   });
 })
